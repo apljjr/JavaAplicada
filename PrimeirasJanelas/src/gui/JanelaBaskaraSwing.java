@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  *
  * @author Adeilson
  */
-public class JanelaBaskaraSwing extends JFrame implements ActionListener{
+public class JanelaBaskaraSwing extends JFrame /*implements ActionListener*/{
     
     private JButton btCalcular;
     private JButton btLimpar;
@@ -82,11 +82,41 @@ public class JanelaBaskaraSwing extends JFrame implements ActionListener{
         container.add(btLimpar);
         
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
-        btCalcular.addActionListener(this);
-        btLimpar.addActionListener(this);
-        miNovo.addActionListener(this);
-        miSair.addActionListener(this);
-        miSobre.addActionListener(this);
+        btCalcular.addActionListener( new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btCalcularAction();
+            }
+        });
+        btLimpar.addActionListener( new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btLimparAction();
+            }
+        });
+        miNovo.addActionListener( new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                miNovoAction();
+            }
+        });
+        miSair.addActionListener( new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                miSairAction();
+            }
+        });
+        miSobre.addActionListener( new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                miSobreAction();
+            }
+        });
         
         //this.setSize(640,480);
         this.pack();
@@ -98,7 +128,7 @@ public class JanelaBaskaraSwing extends JFrame implements ActionListener{
         
         new JanelaBaskaraSwing();
     }
-
+    /*
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btCalcular){
@@ -112,8 +142,8 @@ public class JanelaBaskaraSwing extends JFrame implements ActionListener{
             new JanelaSobre(this);
         }
     }
-
-    private void calcular() {
+    */
+    private void btCalcularAction() {
         
         if(isCamposConsistentes()){
             
@@ -138,7 +168,22 @@ public class JanelaBaskaraSwing extends JFrame implements ActionListener{
         
         
     }
-
+    
+    private void btLimparAction(){
+        limpar();
+    }
+    
+    private void miNovoAction(){
+        limpar();
+    }
+    
+    private void miSairAction(){
+        System.exit(0);
+    }
+    
+    private void miSobreAction(){
+        new JanelaSobre(this);
+    }
     private void limpar() {
         tfA.setText("");
         tfB.setText("");
